@@ -1,0 +1,109 @@
+<html>
+    <head>
+        <title>Irregular Verbs</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+        
+        <script src="./irregular-verbs.js" type="application/javascript"></script>
+        <script type="text/javascript">
+
+            window.onload = function init() {
+                showVerbs(irregularVerbs);
+            }
+
+            function filter(criteria) {
+                let filterByVerb = document.getElementById("search-by-verb").checked;
+                let filterByPast = document.getElementById("search-by-past").checked;
+                let filterByParticiple = document.getElementById("search-by-participle").checked;
+                let filterByMeaning = document.getElementById("search-by-meaning").checked;
+
+                let result = irregularVerbs.filter(irregularVerb => {
+                    let verb = filterByVerb ? irregularVerb.verb.startsWith(criteria) : false;
+                    let past = filterByPast ? irregularVerb.simplePast.startsWith(criteria) : false;
+                    let participle = filterByParticiple ? irregularVerb.pastParticiple.startsWith(criteria) : false;
+                    let meaning = filterByMeaning ? irregularVerb.meaning.startsWith(criteria) : false;
+
+                    return verb || past || participle || meaning;
+                });
+
+                showVerbs(result);
+            }
+            
+            function showVerbs(irregularVerbsToShow) {
+                var container = document.getElementById("container");
+                container.innerHTML = "";
+            
+                irregularVerbsToShow.forEach(irregularVerb => {
+                    var item = document.createElement("a");
+                    item.className = "list-group-item list-group-item-action";
+
+                    var irregularVerbContainer = document.createElement("div");
+                    irregularVerbContainer.className = "row";
+
+                    var verbContainer = document.createElement("div");
+                    var verbText = document.createTextNode(irregularVerb.verb);
+                    verbContainer.appendChild(verbText);
+                    verbContainer.className = "col-2";
+                     
+                    var pastContainer = document.createElement("div");
+                    var pastText = document.createTextNode(irregularVerb.simplePast);
+                    pastContainer.appendChild(pastText);
+                    pastContainer.className = "col-2";
+
+                    var participleContainer = document.createElement("div");
+                    var participleText = document.createTextNode(irregularVerb.pastParticiple);
+                    participleContainer.appendChild(participleText);
+                    participleContainer.className = "col-2";
+
+                    var meaningContainer = document.createElement("div");
+                    var meaningText = document.createTextNode(irregularVerb.meaning);
+                    meaningContainer.appendChild(meaningText);
+                    meaningContainer.className = "col-6";
+
+                    item.appendChild(irregularVerbContainer);
+                    irregularVerbContainer.appendChild(verbContainer);
+                    irregularVerbContainer.appendChild(pastContainer)
+                    irregularVerbContainer.appendChild(participleContainer)
+                    irregularVerbContainer.appendChild(meaningContainer);
+
+                    container.appendChild(item);
+                });
+            }
+        </script>
+    </head>
+    <body>
+        <div class="container">
+            <div class="row">
+                <div class="col-4 mb-3 mt-3">
+                    <input type="text" class="form-control" id="search" placeholder="Type your search here" oninput="filter(this.value)">
+                </div>
+                <div class="col mb-3 mt-3">
+                    Search in &nbsp;
+                    <div class="btn-group" role="group">
+                        <input type="checkbox" class="btn-check" id="search-by-verb" autocomplete="off" checked onclick="filter(search.value)">
+                        <label class="btn btn-outline-primary" for="search-by-verb">Verb</label>
+                        
+                        <input type="checkbox" class="btn-check" id="search-by-past" autocomplete="off" onclick="filter(search.value)">
+                        <label class="btn btn-outline-primary" for="search-by-past">Past</label>
+                        
+                        <input type="checkbox" class="btn-check" id="search-by-participle" autocomplete="off" onclick="filter(search.value)">
+                        <label class="btn btn-outline-primary" for="search-by-participle">Participle</label>
+
+                        <input type="checkbox" class="btn-check" id="search-by-meaning" autocomplete="off" onclick="filter(search.value)">
+                        <label class="btn btn-outline-primary" for="search-by-meaning">Meaning</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="titles" class="container">
+            <div class="row mb-1 fw-bold">
+                <div class="col-2 ps-4">Verb</div>
+                <div class="col-2 ps-4">Past</div>
+                <div class="col-2 ps-3">Past Participle</div>
+                <div class="col-2 ps-2">Meaning</div>
+            </div>
+
+            <div id="container" class="list-group"></div>
+        </div>
+    </body>
+</html>
