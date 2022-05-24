@@ -10,7 +10,7 @@ Clone project, double click irregular-verbs.html and be happy!
 
 ## HOW TO IMPROVE
 
-There is a basic list (irregular-verbs.js) with some common irregular verbs. If you wish, you can put new irregular verbs i this file, obeying the follow schema:
+There is a basic list (irregular-verbs.js) with some common irregular verbs. If you wish, you can put new irregular verbs in this file, obeying the follow schema:
 
 ```json
 { 
