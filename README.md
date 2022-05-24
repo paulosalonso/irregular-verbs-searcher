@@ -6,7 +6,7 @@ The goal of this project is to provide a easy and quick way to search irregular 
 
 ## HOW TO USE
 
-Clone project, double click irregular-verbs.html and be happy!
+Clone (or download) the project, double click irregular-verbs.html and be happy!
 
 ## HOW TO IMPROVE
 
